@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Hillel Lasry - Professional Visual Storyteller crafting cinematic narratives through film, video, and photography">
+    <title>Hillel Lasry | Visual Storyteller</title>
+    
+    <!-- Preconnect to external resources for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://iframe.mediadelivery.net"> <!-- Preconnect to Bunny.net -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === CSS Variables for Consistency === */
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-color: #C52618;
+            --text-color: #fff;
+            --text-muted: rgba(255, 255, 255, 0.8);
+            --transition-speed: 0.3s;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --container-width: min(90%, 1400px);
+            --nav-height: 80px;
+            --grid-gap: 20px;
+            
+            /* New bento grid variables */
+            --bento-radius: 8px;
+            --bento-border: 1px solid rgba(255, 255, 255, 0.1);
+            --bento-overlay: rgba(0, 0, 0, 0.6);
+            --bento-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        /* === Base Reset & Typography === */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--primary-bg);
+            overflow-x: hidden;
+            font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* === Accessibility Enhancements === */
+        .skip-to-content {
+            position: absolute;
+            left: -9999px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            z-index: 9999;
+        }
+        
+        .skip-to-content:focus {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: auto;
+            height: auto;
+            padding: 1rem;
+            background: var(--primary-bg);
+            color: var(--text-color);
+            z-index: 9999;
+            font-weight: bold;
+        }
+        
+        /* === Focus States for Keyboard Navigation === */
+        a:focus, button:focus {
+            outline: 2px solid var(--secondary-color);
+            outline-offset: 3px;
+        }
+
+        /* === Container === */
+        .container {
+            width: var(--container-width);
+            margin: 0 auto;
+        }
+
+        /* === Navigation === */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: var(--nav-height);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: background-color var(--transition-speed);
+            padding: 0 5%;
+        }
+        
+        .navbar.scrolled {
+            background-color: rgba(10, 10, 10, 0.95);
+        }
+        
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color var(--transition-speed);
+        }
+        
+        .logo:hover, .logo:focus {
+            color: var(--secondary-color);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color var(--transition-speed);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width var(--transition-speed);
+        }
+        
+        .nav-link:hover::after, 
+        .nav-link:focus::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* === Hero Section with Improved Visual Impact === */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin-top: var(--nav-height);
+        }
+        
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 8s ease;
+            animation: subtle-zoom 20s ease infinite alternate;
+        }
+        
+        @keyframes subtle-zoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-content {
+            padding-left: 10%;
+            max-width: 650px;
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 2rem + 2.5vw, 4rem);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-profession {
+            font-size: clamp(1.2rem, 1rem + 1vw, 1.6rem);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1rem, 0.9rem + 0.5vw, 1.3rem);
+            font-weight: 300;
+            opacity: 0.9;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .divider {
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 2rem 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            border-radius: 2px;
+            transition: all var(--transition-speed);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button:hover, 
+        .cta-button:focus {
+            background-color: #a81f13;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(197, 38, 24, 0.3);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: opacity var(--transition-speed);
+        }
+        
+        .scroll-indicator:hover {
+            opacity: 0.8;
+        }
+        
+        .scroll-indicator svg {
+            margin-top: 8px;
+            width: 24px;
+            height: 24px;
+            animation: bounceDown 2s infinite;
+        }
+        
+        @keyframes bounceDown {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(10px); }
+            60% { transform: translateY(5px); }
+        }
+
+        /* === Services Section === */
+        .services-section {
+            padding: 8rem 0 6rem;
+            background-color: #080808;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 1.8rem + 1vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: -10px;
+            left: 0;
+        }
+        
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+        
+        .service-column {
+            position: relative;
+            transition: transform var(--transition-speed) ease;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-column:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .service-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+        
+        .service-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+        
+        .service-icon {
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* === REDESIGNED BENTO GRID LAYOUT FOR WORK SECTION === */
+        .work-section {
+            padding: var(--spacing-lg) 0;
+            background-color: var(--primary-bg);
+            overflow: hidden;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            padding: 0 5%;
+        }
+
+        /* Bento Grid Container */
+        .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gap);
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+}
+
+/* Base bento item styles */
+.bento-item {
+    position: relative;
+    border-radius: var(--bento-radius);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all var(--transition-speed);
+    box-shadow: var(--bento-shadow);
+    display: flex;
+    border: none;
+    background-color: rgba(20, 20, 20, 0.8);
+}
+        
+        /* Grid sizing variants */
+        /* 16:9 Video Format */
+.bento-item.video-standard {
+    grid-column: span 6;
+    grid-row: span 3;
+    aspect-ratio: 16/9;
+}
+
+/* Vertical Reels Format (9:16) */
+.bento-item.video-reel {
+    grid-column: span 4;
+    grid-row: span 6;
+    aspect-ratio: 9/16;
+}
+
+/* 4:3 Photo Format */
+.bento-item.photo-standard {
+    grid-column: span 4;
+    grid-row: span 3;
+    aspect-ratio: 4/3;
+}
+
+/* 1:1 Square Format */
+.bento-item.photo-square {
+    grid-column: span 4;
+    grid-row: span 4;
+    aspect-ratio: 1/1;
+}
+
+/* Wide Panorama Format */
+.bento-item.wide {
+    grid-column: span 12;
+    grid-row: span 3;
+    aspect-ratio: 21/9;
+}
+
+/* Feature Format (for highlighted content) */
+.bento-item.feature {
+    grid-column: span 8;
+    grid-row: span 5;
+    aspect-ratio: 16/10;
+}
+       
+/* Ensure the image container has no borders or visual artifacts */
+.bento-thumbnail {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border: none;
+    background-color: #111;
+}
+
+        /* Media styling for bento items */
+        .bento-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1), filter 0.7s ease;
+    filter: brightness(0.9) saturate(1.1);
+    border: none;
+}
+
+
+        .bunny-video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000;
+}
+
+        .bunny-video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1);
+            z-index: 1;
+        }
+
+        /* Improved video loading state with optimized poster image */
+        .video-poster {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 2;
+            transition: opacity 0.4s ease;
+        }
+
+        .play-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .play-indicator svg {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.2s ease;
+        }
+
+        .bunny-video-container:hover .play-indicator {
+            background-color: rgba(197, 38, 24, 0.8);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .bunny-video-container:hover .play-indicator svg {
+            transform: scale(1.2);
+        }
+
+        /* Video state classes */
+        .bunny-video-container.loading .play-indicator {
+            opacity: 0.7;
+        }
+
+        .bunny-video-container.playing iframe {
+            opacity: 1;
+            z-index: 3;
+        }
+
+        .bunny-video-container.playing .video-poster,
+        .bunny-video-container.playing .play-indicator {
+            opacity: 0;
+        }
+
+       /* Updated styling for bento-overlay to remove the line */
+       .bento-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Use a full-height gradient with transparent middle section */
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.3) 0%,
+        rgba(0,0,0,0) 30%,
+        rgba(0,0,0,0) 60%,
+        rgba(0,0,0,0.85) 100%
+    );
+    display: flex;
+    align-items: flex-end;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    z-index: 5;
+    pointer-events: none;
+}
+
+
+
+        .bento-meta {
+            transform: translateY(0);
+            transition: transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        .bento-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .bento-category {
+            font-size: 0.875rem;
+            opacity: 0.7;
+            font-weight: 300;
+            letter-spacing: 0.03em;
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 2px;
+        }
+
+        /* Hover Effects for Bento Items */
+        .bento-item:hover,
+.bento-item:focus-within {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    /* No border */
+    border: none;
+}
+
+    
+.bento-item:hover .bento-overlay,
+.bento-item:focus-within .bento-overlay {
+    /* Slightly darken the overlay on hover but maintain seamless gradient */
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.4) 0%,
+        rgba(0,0,0,0.1) 30%,
+        rgba(0,0,0,0.1) 60%,
+        rgba(0,0,0,0.9) 100%
+    );
+}
+
+       /* Update bento item hover state to prevent the line */
+.bento-item:hover .bento-overlay,
+.bento-item:focus-within .bento-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.1) 100%);
+    /* Remove any properties that might cause a line */
+    border: none;
+    box-shadow: none;
+}
+        /* View All Button */
+        .view-all-container {
+            text-align: center;
+            padding: 4rem 0 2rem;
+        }
+
+        .view-all-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: transparent;
+            border: 1px solid var(--text-muted);
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            transition: all var(--transition-speed) ease;
+            border-radius: 2px;
+        }
+
+        .view-all-btn:hover,
+        .view-all-btn:focus {
+            background-color: var(--text-color);
+            color: var(--primary-bg);
+            border-color: var(--text-color);
+        }
+
+        /* === REDESIGNED PROJECT OVERLAY === */
+/* === REDESIGNED PROJECT OVERLAY === */
+.project-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.project-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.project-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(5, 5, 5, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+.project-container {
+    position: relative;
+    width: 95%;
+    max-width: 1400px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    transform: translateY(20px) scale(0.98);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.5s ease;
+    z-index: 2;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #111;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+}
+
+.project-overlay.active .project-container {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem;
+    background-color: rgba(15, 15, 15, 0.9);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-title-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0 0 0.25rem;
+    letter-spacing: 0.01em;
+}
+        
+.project-subtitle {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.project-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.project-close:hover,
+.project-close:focus {
+    color: var(--text-color);
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
+}
+
+.project-content {
+    width: 100%;
+    background-color: #000;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Improved project content container with aspect ratio */
+.project-content.video-content {
+    /* Default size for mobile */
+    aspect-ratio: 16/9;
+    width: 100%;
+    height: auto;
+    max-height: 50vh;
+    background-color: #000;
+}
+        
+.project-content.image-content {
+    max-height: 60vh;
+}
+
+.project-content iframe,
+.project-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    border: none;
+}
+
+.project-footer {
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: rgba(15, 15, 15, 0.9);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+        
+.project-description {
+    width: 100%;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    border-radius: 4px;
+    transition: all var(--transition-speed);
+}
+
+.project-link:hover,
+.project-link:focus {
+    background-color: #a81f13;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(168, 31, 19, 0.3);
+}
+        
+.project-link svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+}
+        
+.project-link:hover svg,
+.project-link:focus svg {
+    transform: translateX(3px);
+}
+
+/* Media Queries for larger screens */
+@media (min-width: 768px) {
+    .project-header {
+        padding: 1.5rem 2rem;
+    }
+    
+    .project-title {
+        font-size: 1.75rem;
+    }
+    
+    .project-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .project-close {
+        width: 42px;
+        height: 42px;
+    }
+    
+    .project-content.video-content {
+        max-height: 60vh;
+    }
+    
+    .project-content.image-content {
+        max-height: 70vh;
+    }
+    
+    .project-footer {
+        padding: 1.5rem 2rem;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .project-description {
+        max-width: 60%;
+    }
+    
+    .project-link {
+        width: auto;
+        padding: 0.9rem 1.75rem;
+        font-size: 0.95rem;
+        justify-content: flex-start;
+    }
+    
+    .project-link svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* Full Screen Layout */
+@media (min-width: 1200px) {
+    .project-content.video-content {
+        max-height: 65vh;
+    }
+}
+
+/* Special fixes for very small screens */
+@media (max-width: 480px) {
+    .project-container {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+    
+    .project-content.video-content {
+        max-height: 40vh;
+    }
+}
+        .project-content iframe,
+        .project-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .project-footer {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(15, 15, 15, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .project-description {
+            max-width: 60%;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.9rem 1.75rem;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            border-radius: 4px;
+            transition: all var(--transition-speed);
+        }
+
+        .project-link:hover,
+        .project-link:focus {
+            background-color: #a81f13;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(168, 31, 19, 0.3);
+        }
+        
+        .project-link svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+        }
+        
+        .project-link:hover svg,
+        .project-link:focus svg {
+            transform: translateX(3px);
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 8rem 5%;
+            background-color: #080808;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+        
+        .about-image {
+            position: relative;
+            height: 100%;
+            min-height: 400px;
+            overflow: hidden;
+            border-radius: 4px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 8rem 5%;
+            background-color: #0a0a0a;
+        }
+        
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-form {
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: border-color var(--transition-speed) ease;
+            border-radius: 2px;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+        
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            padding: 1rem 2.5rem;
+            background-color: var(--secondary-color);
+            border: none;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            border-radius: 2px;
+            justify-self: start;
+        }
+        
+        .submit-btn:hover,
+        .submit-btn:focus {
+            background-color: #a81f13;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2.5rem 5%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: #050505;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .footer-contact a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color var(--transition-speed) ease;
+            position: relative;
+        }
+        
+        .footer-contact a:hover,
+        .footer-contact a:focus {
+            color: var(--text-color);
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .social-icon {
+            color: var(--text-muted);
+            transition: color var(--transition-speed) ease;
+            position: relative;
+        }
+        
+        .social-icon:hover,
+        .social-icon:focus {
+            color: var(--text-color);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary-color);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-speed) ease;
+            z-index: 900;
+            cursor: pointer;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover,
+        .back-to-top:focus {
+            background-color: #a81f13;
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive Media Queries */
+        @media (max-width: 1400px) {
+            .bento-grid {
+                grid-template-columns: repeat(12, 1fr);
+            }
+            
+            .bento-item.large {
+                grid-column: span 6;
+                grid-row: span 2;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .bento-grid {
+                grid-template-columns: repeat(12, 1fr);
+            }
+            
+            .bento-item.primary {
+                grid-column: span 6;
+                grid-row: span 2;
+            }
+            
+            .bento-item.secondary {
+                grid-column: span 6;
+                grid-row: span 2;
+            }
+            
+            .bento-item.tertiary {
+                grid-column: span 4;
+                grid-row: span 1;
+            }
+            
+            .project-description {
+                max-width: 50%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .bento-grid {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 15px;
+            }
+            
+            .bento-item.primary,
+            .bento-item.secondary,
+            .bento-item.tertiary,
+            .bento-item.large {
+                grid-column: span 3;
+                grid-row: span 1;
+            }
+            
+            .bento-item.wide {
+                grid-column: span 6;
+            }
+            
+            .bento-title {
+                font-size: 1.3rem;
+            }
+            
+            .bento-overlay {
+                padding: 1.5rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+            
+            .project-header {
+                padding: 1.2rem 1.5rem;
+            }
+            
+            .project-title {
+                font-size: 1.5rem;
+            }
+            
+            .project-footer {
+                padding: 1.2rem 1.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+            
+            .project-description {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --grid-gap: 12px;
+            }
+            
+            .bento-grid {
+                grid-template-columns: repeat(6, 1fr);
+                width: 92%;
+            }
+            
+            .bento-item.primary,
+            .bento-item.secondary,
+            .bento-item.tertiary,
+            .bento-item.large,
+            .bento-item.wide {
+                grid-column: span 6;
+            }
+            
+            .bento-title {
+                font-size: 1.2rem;
+            }
+            
+            .bento-overlay {
+                padding: 1.2rem;
+            }
+            
+            .project-title {
+                font-size: 1.3rem;
+            }
+            
+            .project-subtitle {
+                font-size: 0.8rem;
+            }
+            
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: rgba(10, 10, 10, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2.5rem;
+                transition: right 0.3s ease;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .bento-item {
+                grid-column: 1 / -1 !important;
+            }
+            
+            .bento-overlay {
+                padding: 1rem;
+                height: 60%;
+            }
+            
+            .bento-title {
+                font-size: 1.1rem;
+            }
+            
+            .bento-category {
+                font-size: 0.8rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .project-container {
+                width: 100%;
+                height: 100%;
+                max-height: 100vh;
+                border-radius: 0;
+            }
+            
+            .project-header {
+                padding: 1rem;
+            }
+            
+            .project-title {
+                font-size: 1.1rem;
+            }
+            
+            .project-footer {
+                padding: 1rem;
+            }
+            
+            .project-link {
+                width: 100%;
+                justify-content: center;
+                padding: 0.8rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to content for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <a href="/" class="logo" aria-label="Hillel Lasry Home">
+            HILLEL LASRY
+        </a>
+        
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+        
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#work" class="nav-link active">Work</a></li>
+            <li><a href="#services" class="nav-link">Services</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background" style="background-image: url('https://source.unsplash.com/random/1920x1080/?cinematic');"></div>
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1 class="hero-title">HILLEL LASRY</h1>
+                <p class="hero-profession">VISUAL STORYTELLER</p>
+                <div class="divider"></div>
+                <p class="hero-subtitle">Crafting compelling narratives through film, video, and photography that captivate and inspire audiences.</p>
+                <a href="#work" class="cta-button">View My Work</a>
+            </div>
+        </div>
+        <a href="#services" class="scroll-indicator" aria-label="Scroll to services section">
+            EXPLORE
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </a>
+    </section>
+    
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Services Section -->
+        <section id="services" class="services-section">
+            <div class="container">
+                <h2 class="section-title">Services</h2>
+                
+                <div class="services-container">
+                    <div class="service-column">
+                        <div class="service-icon">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M23 7l-7 5 7 5V7z"></path>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">FILM & VIDEO</h3>
+                        <p class="service-description">Cinematic promotional videos, event coverage, and creative short films that tell your story with impact. Each project is crafted with precision to capture your unique vision.</p>
+                    </div>
+                    
+                    <div class="service-column">
+                        <div class="service-icon">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                <circle cx="12" cy="13" r="4"></circle>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">PHOTOGRAPHY</h3>
+                        <p class="service-description">Compelling visual imagery for products, portraits, and events that capture authentic moments. Using light and composition to create photographs that resonate on a deeper level.</p>
+                    </div>
+                    
+                    <div class="service-column">
+                        <div class="service-icon">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+                                <line x1="8" y1="2" x2="8" y2="18"></line>
+                                <line x1="16" y1="6" x2="16" y2="22"></line>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">CREATIVE DIRECTION</h3>
+                        <p class="service-description">Comprehensive creative guidance for brands and projects, ensuring a cohesive visual identity across all platforms and touchpoints, from concept to final delivery.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- REDESIGNED Work Section with Bento Grid -->
+        <section id="work" class="work-section">
+            <div class="section-header">
+                <div class="container">
+                    <h2 class="section-title">Selected Work</h2>
+                </div>
+            </div>
+            
+            <!-- New Bento Grid Layout -->
+            <div class="bento-grid" id="bentoGrid">
+                <!-- Visions Project (Large) -->
+                <a href="#visions" class="bento-item wide" 
+                   data-project-id="visions"
+                   data-media-type="video" 
+                   data-video-id="ebbc0f62-14f7-484f-9d01-e505ed89f36f"
+                   data-video-poster="https://images.unsplash.com/photo-1746254538152-2420e6b0a9dc?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                   data-description="A cinematic exploration of light and shadow in urban landscapes, showcasing the interplay between architecture and natural elements."
+                   aria-label="View Visions Project">
+                    <div class="bento-thumbnail">
+                        <!-- Content will be dynamically generated by JavaScript -->
+                    </div>
+                </a>
+                
+                <!-- Nightfall Project -->
+                <a href="#nightfall" class="bento-item video-reel" 
+                   data-project-id="nightfall"
+                   data-media-type="video" 
+                   data-image-url="https://plus.unsplash.com/premium_photo-1710267197055-a74e03c51e1a?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                   data-video-id="a4877fa2-eda5-418e-b8d3-c2596d2df2e2"
+                   data-video-poster="https://source.unsplash.com/random/800x600/?film"
+                   data-description="A series capturing the transition between day and night in metropolitan areas, examining how artificial light transforms urban environments."
+                   aria-label="View Nightfall Project">
+                    <div class="bento-thumbnail">
+                        <!-- Content will be dynamically generated by JavaScript -->
+                    </div>
+                </a>
+                
+                <!-- Through The Glass Project -->
+                <a href="#glass" class="bento-item photo-standard" 
+                   data-project-id="glass"
+                   data-media-type="image" 
+                   data-image-url="https://plus.unsplash.com/premium_photo-1711697144877-b068f748bcd1?q=80&w=2030&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                   data-video-id="your-alternate-video-id-2"
+                   data-video-poster="https://source.unsplash.com/random/800x1000/?cinematic"
+                   data-description="Documentary-style investigation of reflections and perspectives, examining how glass shapes our perception of urban environments."
+                   aria-label="View Through The Glass Project">
+                    <div class="bento-thumbnail">
+                        <!-- Content will be dynamically generated by JavaScript -->
+                    </div>
+                </a>
+                
+                <!-- Ascension Project -->
+                <a href="#ascension" class="bento-item photo-standard" 
+                   data-project-id="ascension"
+                   data-media-type="image" 
+                   data-video-id="a4877fa2-eda5-418e-b8d3-c2596d2df2e2"
+                   data-video-poster="https://images.unsplash.com/photo-1746202382547-ecc40a122aed?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                   data-image-url="https://plus.unsplash.com/premium_photo-1711651344613-58629bed4f09?q=80&w=2030&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                   data-description="Aerial photography series showcasing stunning landscapes and architectural wonders from unexpected perspectives."
+                   aria-label="View Ascension Project">
+                    <div class="bento-thumbnail">
+                        <!-- Content will be dynamically generated by JavaScript -->
+                    </div>
+                </a>
+                
+                <!-- Echoes Project (Wide) -->
+                <a href="#echoes" class="bento-item video-reel" 
+                   data-project-id="echoes"
+                   data-media-type="image" 
+                   data-video-id="echoes-video-id"
+                   data-video-poster="https://source.unsplash.com/random/1600x900/?music"
+                   data-image-url="https://8upload.com/preview/6818dcf9bf898/__________________2025-05-05_184004.png"
+                   data-description="A collaborative music video featuring visual interpretations of sound waves and rhythmic patterns, exploring the relationship between audio and visual art forms."
+                   aria-label="View Echoes Project">
+                    <div class="bento-thumbnail">
+                        <!-- Content will be dynamically generated by JavaScript -->
+                    </div>
+                </a>
+                
+                <!-- Motion Project -->
+                <a href="#motion" class="bento-item photo-standard" 
+                   data-project-id="motion"
+                   data-media-type="image" 
+                   data-image-url="https://plus.unsplash.com/premium_photo-1709632458207-b3c138c6ff89?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                   data-video-id="your-alternate-video-id-3"
+                   data-video-poster="https://source.unsplash.com/random/800x600/?product"
+                   data-description="Commercial product photography with dynamic motion elements, creating compelling visual narratives for lifestyle brands."
+                   aria-label="View Motion Project">
+                    <div class="bento-thumbnail">
+                        <!-- Content will be dynamically generated by JavaScript -->
+                    </div>
+                </a>
+            </div>
+            
+            <div class="view-all-container">
+                <a href="#allwork" class="view-all-btn">VIEW ALL WORK</a>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2 class="section-title">About</h2>
+                
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Hillel Lasry is a visual storyteller specializing in cinematic film production and photography. With over a decade of experience crafting compelling visual narratives, Hillel's work spans commercial projects, documentaries, music videos, and fine art photography.</p>
+                        
+                        <p>His distinctive approach combines technical precision with an intuitive understanding of emotional resonance, creating visuals that not only capture attention but also forge lasting connections with audiences.</p>
+                        
+                        <p>Based in Los Angeles but working globally, Hillel collaborates with brands, agencies, musicians, and fellow artists who value authentic storytelling and visual excellence.</p>
+                    </div>
+                    
+                    <div class="about-image">
+                        <img src="https://source.unsplash.com/random/800x1000/?portrait" alt="Hillel Lasry - Visual Storyteller">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2 class="section-title">Contact</h2>
+                
+                <div class="contact-content">
+                    <p style="color: var(--text-muted); margin-bottom: 2rem;">Interested in working together? Let's discuss your project.</p>
+                    
+                    <form class="contact-form" aria-label="Contact form">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" id="name" class="form-input" required aria-required="true">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" class="form-input" required aria-required="true">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone (optional)</label>
+                            <input type="tel" id="phone" class="form-input">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="project" class="form-label">Project Type</label>
+                            <select id="project" class="form-input">
+                                <option value="" disabled selected>Select project type</option>
+                                <option value="commercial">Commercial Video</option>
+                                <option value="documentary">Documentary</option>
+                                <option value="music">Music Video</option>
+                                <option value="photography">Photography</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" class="form-input form-textarea" required aria-required="true"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">SEND MESSAGE</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-copyright">
+                    © 2024 Hillel Lasry. All rights reserved.
+                </div>
+                <div class="footer-contact">
+                    <a href="mailto:contact@hillellasry.com" class="footer-email">contact@hillellasry.com</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://instagram.com/" class="social-icon" target="_blank" rel="noopener" aria-label="Instagram">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" fill="currentColor"></path>
+                        </svg>
+                    </a>
+                    <a href="https://youtube.com/" class="social-icon" target="_blank" rel="noopener" aria-label="YouTube">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"></path>
+                        </svg>
+                    </a>
+                    <a href="https://vimeo.com/" class="social-icon" target="_blank" rel="noopener" aria-label="Vimeo">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23.977 6.416c-.105 2.338-1.739 5.543-4.894 9.609-3.268 4.247-6.026 6.37-8.29 6.37-1.409 0-2.578-1.294-3.553-3.881L5.322 11.4C4.603 8.816 3.834 7.522 3.01 7.522c-.179 0-.806.378-1.881 1.132L0 7.197a315.065 315.065 0 003.501-3.128C5.08 2.701 6.266 1.984 7.055 1.91c1.867-.18 3.016 1.1 3.447 3.838.465 2.953.789 4.789.971 5.507.539 2.45 1.131 3.674 1.776 3.674.502 0 1.256-.796 2.265-2.385 1.004-1.589 1.54-2.797 1.612-3.628.144-1.371-.395-2.061-1.614-2.061-.574 0-1.167.121-1.777.391 1.186-3.868 3.434-5.757 6.762-5.637 2.473.06 3.628 1.664 3.493 4.797l-.013.013z" fill="currentColor"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to top button -->
+    <a href="#home" class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </a>
+    
+    <!-- REDESIGNED Project Overlay for fullscreen view -->
+    <div class="project-overlay" id="projectOverlay">
+        <div class="project-backdrop"></div>
+        <div class="project-container">
+            <div class="project-header">
+                <div class="project-title-wrapper">
+                    <h3 class="project-title"></h3>
+                    <span class="project-subtitle"></span>
+                </div>
+                <button class="project-close" aria-label="Close project">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="project-content"></div>
+            <div class="project-footer">
+                <div class="project-description"></div>
+                <a href="#" class="project-link">
+                    View Project
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Enhanced JavaScript for improved functionality -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Elements
+        const navbar = document.getElementById('navbar');
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const backToTop = document.getElementById('backToTop');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const bentoItems = document.querySelectorAll('.bento-item');
+        const projectOverlay = document.getElementById('projectOverlay');
+        
+        // Toggle mobile menu
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                menuToggle.setAttribute('aria-expanded', 
+                    menuToggle.getAttribute('aria-expanded') === 'false' ? 'true' : 'false');
+            });
+        }
+        
+        // Close menu when clicking nav links on mobile
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+        
+        // Scroll events - using throttling for performance
+        let lastScrollPosition = 0;
+        let ticking = false;
+        
+        window.addEventListener('scroll', () => {
+            lastScrollPosition = window.scrollY;
+            
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    // Show/hide back to top button
+                    if (lastScrollPosition > 500) {
+                        backToTop.classList.add('visible');
+                    } else {
+                        backToTop.classList.remove('visible');
+                    }
+                    
+                    // Add background to navbar when scrolled
+                    if (lastScrollPosition > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                    
+                    // Update active nav link based on scroll position
+                    updateActiveNavLink();
+                    
+                    ticking = false;
+                });
+                
+                ticking = true;
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                // Don't prevent default for project overlay links with hashtags
+                if (this.closest('.project-overlay')) return;
+                
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Update active nav link based on scroll position
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('section[id]');
+            const scrollPosition = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+        
+        // Form validation and submission
+        const contactForm = document.querySelector('.contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simple form validation
+                const formElements = this.elements;
+                let isValid = true;
+                
+                for (let i = 0; i < formElements.length; i++) {
+                    if (formElements[i].hasAttribute('required') && !formElements[i].value) {
+                        isValid = false;
+                        formElements[i].style.borderColor = 'red';
+                    } else if (formElements[i].type !== 'submit') {
+                        formElements[i].style.borderColor = '';
+                    }
+                }
+                
+                if (isValid) {
+                    // Clear form
+                    for (let i = 0; i < formElements.length; i++) {
+                        if (formElements[i].type !== 'submit') {
+                            formElements[i].value = '';
+                        }
+                    }
+                    
+                    // Show success message
+                    alert('Your message has been sent. Thank you!');
+                } else {
+                    alert('Please fill in all required fields.');
+                }
+            });
+        }
+        
+        // ======== ENHANCED BENTO GRID HANDLING ========
+        
+        // Function to render dynamic content for each project
+        function initializeProjects() {
+            bentoItems.forEach(item => {
+                const mediaType = item.getAttribute('data-media-type');
+                renderProjectMedia(item, mediaType);
+                
+                // Add click event listener for project items
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Get project data for overlay
+                    const projectId = this.getAttribute('data-project-id');
+                    const projectTitle = this.getAttribute('aria-label').replace('View ', '').replace(' Project', '');
+                    const projectDescription = this.getAttribute('data-description');
+                    
+                    // Open in overlay
+                    openProjectOverlay(this, projectId, projectTitle, mediaType, projectDescription);
+                });
+            });
+        }
+        
+        // Function to render either video or image for a project
+        function renderProjectMedia(projectElement, mediaType) {
+            const thumbnailContainer = projectElement.querySelector('.bento-thumbnail');
+            const projectId = projectElement.getAttribute('data-project-id');
+            
+            // Clear any existing content
+            thumbnailContainer.innerHTML = '';
+            
+            if (mediaType === 'video') {
+                // Get video data attributes
+                const videoId = projectElement.getAttribute('data-video-id');
+                const posterUrl = projectElement.getAttribute('data-video-poster');
+                
+                // Create video container
+                const videoContainer = document.createElement('div');
+                videoContainer.className = 'bunny-video-container';
+                videoContainer.setAttribute('data-project', projectId);
+                
+                // Create poster image (loaded immediately)
+                const posterImage = document.createElement('img');
+                posterImage.className = 'video-poster';
+                posterImage.src = posterUrl;
+                posterImage.alt = '';
+                posterImage.loading = 'eager'; // Ensure poster loads quickly
+                
+                // Create play indicator
+                const playIndicator = document.createElement('div');
+                playIndicator.className = 'play-indicator';
+                playIndicator.innerHTML = `
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                `;
+                
+                // Lazy-load iframe container (no src yet - will be set on hover)
+                const iframeContainer = document.createElement('div');
+                iframeContainer.className = 'iframe-container';
+                
+                // Add elements to container
+                videoContainer.appendChild(iframeContainer);
+                videoContainer.appendChild(posterImage);
+                videoContainer.appendChild(playIndicator);
+                
+                // OPTIMIZE: Only create iframe when needed, not on page load
+                videoContainer.addEventListener('mouseenter', function() {
+                    // Only load video if it hasn't been loaded yet
+                    if (!this.querySelector('iframe')) {
+                        // Add loading class for visual feedback
+                        this.classList.add('loading');
+                        
+                        // Create iframe when hovered
+                        const iframe = document.createElement('iframe');
+                        iframe.src = `https://iframe.mediadelivery.net/embed/420343/${videoId}?autoplay=true&muted=true`;
+                        iframe.loading = 'lazy';
+                        iframe.allow = 'accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;';
+                        iframe.allowFullscreen = true;
+                        
+                        // Add to container
+                        iframeContainer.appendChild(iframe);
+                        
+                        // Add playing class after a short delay to allow the iframe to load
+                        setTimeout(() => {
+                            this.classList.remove('loading');
+                            this.classList.add('playing');
+                        }, 200);
+                    } else {
+                        // If iframe already exists, just add playing class
+                        this.classList.add('playing');
+                    }
+                });
+                
+                videoContainer.addEventListener('mouseleave', function() {
+                    // Only reset if not in fullscreen mode
+                    if (!document.fullscreenElement) {
+                        this.classList.remove('playing');
+                    }
+                });
+                
+                thumbnailContainer.appendChild(videoContainer);
+                
+            } else {
+                // Create image content
+                const imageUrl = projectElement.getAttribute('data-image-url');
+                
+                const img = document.createElement('img');
+                img.className = 'bento-image';
+                img.src = imageUrl;
+                img.alt = projectElement.getAttribute('aria-label').replace('View ', '');
+                img.loading = 'lazy'; // Use native lazy loading
+                
+                thumbnailContainer.appendChild(img);
+            }
+            
+            // Add the bento overlay with project details
+            const projectTitle = projectElement.getAttribute('aria-label').replace('View ', '').replace(' Project', '');
+            
+            // Map project type to category
+            const categoryMap = {
+                'visions': 'Commercial Film',
+                'nightfall': 'Short Film',
+                'glass': 'Documentary',
+                'ascension': 'Aerial Series',
+                'echoes': 'Music Video',
+                'motion': 'Product Series'
+            };
+            
+            const projectCategory = categoryMap[projectId] || 'Project';
+            
+            // Create the overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'bento-overlay';
+            overlay.innerHTML = `
+                <div class="bento-meta">
+                    <h3 class="bento-title">${projectTitle}</h3>
+                    <span class="bento-category">${projectCategory}</span>
+                </div>
+            `;
+            
+            thumbnailContainer.appendChild(overlay);
+        }
+        
+        // ENHANCED function to open project overlay
+        function openProjectOverlay(projectElement, projectId, projectTitle, mediaType, description) {
+            // Determine media source based on type
+            const videoId = projectElement.getAttribute('data-video-id');
+            const imageUrl = projectElement.getAttribute('data-image-url');
+            
+            // Set project overlay title and subtitle
+            document.querySelector('.project-title').textContent = projectTitle;
+            
+            // Map project type to category for subtitle
+            const categoryMap = {
+                'visions': 'Commercial Film',
+                'nightfall': 'Short Film',
+                'glass': 'Documentary',
+                'ascension': 'Aerial Series',
+                'echoes': 'Music Video',
+                'motion': 'Product Series'
+            };
+            
+            document.querySelector('.project-subtitle').textContent = categoryMap[projectId] || 'Project';
+            
+            // Set project description
+            document.querySelector('.project-description').textContent = description || 'A visual exploration of form and narrative through cinematic storytelling.';
+            
+            // Update project link
+            const projectLink = document.querySelector('.project-link');
+            projectLink.setAttribute('href', `/projects/${projectId}`);
+            
+            // Create media content based on type
+            const projectContent = document.querySelector('.project-content');
+            projectContent.innerHTML = '';
+            
+            if (mediaType === 'video') {
+                projectContent.className = 'project-content video-content';
+                
+                const iframe = document.createElement('iframe');
+                iframe.src = `https://iframe.mediadelivery.net/embed/420343/${videoId}?autoplay=true&muted=false`;
+                iframe.loading = 'eager'; // Load immediately in overlay
+                iframe.allow = 'accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;';
+                iframe.allowFullscreen = true;
+                
+                projectContent.appendChild(iframe);
+            } else {
+                // For images, create an image element
+                projectContent.className = 'project-content image-content';
+                
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = projectTitle;
+                
+                projectContent.appendChild(img);
+            }
+            
+            // Show overlay with animation
+            projectOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when overlay is open
+            
+            // Focus trap for accessibility
+            const closeButton = document.querySelector('.project-close');
+            closeButton.focus();
+            
+            // Add event listener to close button
+            closeButton.addEventListener('click', closeProjectOverlay);
+            
+            // Add event listener to backdrop for clicking outside to close
+            document.querySelector('.project-backdrop').addEventListener('click', closeProjectOverlay);
+            
+            // Add escape key to close overlay
+            document.addEventListener('keydown', handleEscKey);
+        }
+        
+        // Function to close project overlay
+        function closeProjectOverlay() {
+            projectOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+            
+            // Clear media content after a short delay to allow animation
+            setTimeout(() => {
+                document.querySelector('.project-content').innerHTML = '';
+            }, 400);
+            
+            // Remove event listeners
+            document.removeEventListener('keydown', handleEscKey);
+        }
+        
+        // Function to handle escape key press
+        function handleEscKey(e) {
+            if (e.key === 'Escape') {
+                closeProjectOverlay();
+            }
+        }
+        
+        // Set up close button event listener
+        const closeButton = document.querySelector('.project-close');
+        if (closeButton) {
+            closeButton.addEventListener('click', closeProjectOverlay);
+        }
+        
+        // Initialize the page
+        initializeProjects();
+      });
+    </script>
+</body>
+</html>
